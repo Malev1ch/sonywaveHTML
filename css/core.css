@@ -9,6 +9,10 @@
     src: url('/assets/fonts/cy-grotesk-grand-dark.otf');
 }
 
+body {
+    background-color: black;
+}
+
 html {
     scroll-behavior: smooth;
 }
