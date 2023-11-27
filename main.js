@@ -31,3 +31,31 @@ function toggleAccordion() {
 }
 
 items.forEach((item) => item.addEventListener("click", toggleAccordion));
+
+// lazy load function
+document.addEventListener("DOMContentLoaded", function () {
+  const allImages = document.querySelectorAll("img");
+
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(function (entries, observer) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          const image = entry.target;
+          image.src = image.getAttribute("data-src");
+          observer.unobserve(image);
+        }
+      });
+    });
+
+    allImages.forEach(function (image) {
+      image.setAttribute("data-src", image.src);
+      image.removeAttribute("src"); 
+      observer.observe(image);
+    });
+  } else {
+    allImages.forEach(function (image) {
+      image.src = image.getAttribute("data-src");
+    });
+  }
+});
+// lazy load function
